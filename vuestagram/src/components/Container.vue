@@ -26,6 +26,10 @@
       </div>
     </div>
 
+    <div v-if="step == 3">
+      <MyPage :one="1"/>
+    </div>
+
   </div>
 </template>
 
@@ -33,6 +37,7 @@
 import Post from "./Post.vue"
 import FilterBox from './FilterBox.vue'
 import filterData from '../assets/imgFilter.js'
+import MyPage from './MyPage.vue'
 
 export default {
   data() {
@@ -43,6 +48,7 @@ export default {
   components: {
     Post,
     FilterBox,
+    MyPage,
   },
   props: {
     article : Array,

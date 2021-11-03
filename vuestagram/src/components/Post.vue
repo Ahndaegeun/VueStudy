@@ -1,12 +1,16 @@
 <template>
   <div class="post">
     <div class="post-header">
-      <div class="profile" :style="{ backgroundImage : `url(${article.userImage})`}"></div>
+      <div class="profile" 
+          :style="{ backgroundImage : `url(${article.userImage})`}"></div>
       <span class="profile-name">{{article.name}}</span>
     </div>
-    <div :class="article.filter" class="post-body" :style="{ backgroundImage : `url(${article.postImage})`}"></div>
+    <div :class="article.filter" 
+          class="post-body" 
+          :style="{ backgroundImage : `url(${article.postImage})`}"
+          @click="$store.commit('clickLike')"></div>
     <div class="post-content">
-      <p>{{article.likes}} Likes</p>
+      <p>{{$store.state.likes}} Likes</p>
       <p><strong>{{article.name}}</strong>{{article.content}}</p>
       <p class="date">{{article.date}}</p>
     </div>

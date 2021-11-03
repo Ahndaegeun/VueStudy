@@ -10,6 +10,14 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
 
+  <!-- <h4>안녕 {{ $store.state.name }}</h4>
+  <button @click="$store.commit('changedName')">button</button>
+  <h4>Your age is {{ $store.state.age }}</h4>
+  <button @click="$store.commit('upAge', 10)">upAge</button> -->
+
+  <!-- <h1>{{$store.state.more}}</h1>
+  <button @click="$store.dispatch('getData')">more</button> -->
+
   <Container @write="postingText = $event" 
             :article="article" 
             :step="step" 
@@ -30,6 +38,7 @@
 import Container from "./components/Container.vue"
 import Contents from "./assets/_data.js"
 import axios from 'axios'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'App',
@@ -37,10 +46,11 @@ export default {
     return {
       article: Contents,
       articleNum: 0,
-      step : 0,
+      step : 3,
       objectUrl : '',
       postingText : '',
       filterId : '',
+      counter: 0,
     }
   },
   mounted() {
@@ -82,7 +92,16 @@ export default {
       this.article.unshift(myPost)
       this.step = 0
       console.log(myPost)
-    }
+    },
+    ...mapMutations(['setMore', 'clickLike']),
+    ...mapActions(['getData']),
+  },
+  computed : {
+    name() {
+      return this.$store.state.name
+    },
+    ...mapState(['name', 'age', 'likes']),
+    ...mapState({ primaryName : 'name'})
   }
 }
 </script>
